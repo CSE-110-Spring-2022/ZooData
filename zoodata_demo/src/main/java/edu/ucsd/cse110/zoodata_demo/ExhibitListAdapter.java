@@ -60,15 +60,10 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
         this.notifyDataSetChanged();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setLastKnownCoords(Pair<Double, Double> lastKnownCoords) {
         this.lastKnownCoords = lastKnownCoords;
-        IntStream.range(0, exhibitsWithGroups.size())
-            .forEach(position -> {
-                var exhibitWithGroup = exhibitsWithGroups.get(position);
-                if (exhibitWithGroup.isCloseTo(lastKnownCoords)) {
-                    this.notifyItemChanged(position);
-                }
-            });
+        this.notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

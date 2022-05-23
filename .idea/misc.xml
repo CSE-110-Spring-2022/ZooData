@@ -5,7 +5,9 @@
       <map>
         <entry key="zoodata_demo/src/main/res/layout/activity_main.xml" value="0.12537993920972645" />
         <entry key="zoodata_demo/src/main/res/layout/exhibit_list_item.xml" value="0.335" />
-        <entry key="zoodata_demo/src/main/res/layout/main.xml" value="0.10840932117527863" />
+        <entry key="zoodata_demo/src/main/res/layout/location_mock_dialog.xml" value="0.27087732718949864" />
+        <entry key="zoodata_demo/src/main/res/layout/main.xml" value="0.12453938709324738" />
+        <entry key="zoodata_demo/src/main/res/layout/mock_dialog.xml" value="0.15648148148148147" />
         <entry key="zoodataexample/src/main/res/layout-sw600dp/fragment_exhibit_detail.xml" value="0.1" />
         <entry key="zoodataexample/src/main/res/layout/activity_exhibit_detail.xml" value="0.1" />
         <entry key="zoodataexample/src/main/res/layout/exhibit_list_content.xml" value="0.16394927536231885" />

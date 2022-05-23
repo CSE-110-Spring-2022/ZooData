@@ -1,4 +1,4 @@
-package edu.ucsd.cse110.zoodata_demo.model;
+package edu.ucsd.cse110.zoodata_demo.db;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

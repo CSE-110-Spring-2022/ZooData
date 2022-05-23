@@ -1,4 +1,4 @@
-package edu.ucsd.cse110.zoodata_demo.model;
+package edu.ucsd.cse110.zoodata_demo.db;
 
 import android.content.Context;
 import android.util.Log;
