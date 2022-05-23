@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="exhibitWithGroup"
+            type="edu.ucsd.cse110.zoodata.ExhibitWithGroup" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="96dp">
+
+        <TextView
+            android:id="@+id/exhibit_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/hint_exhibit_name"
+            android:text="@{exhibitWithGroup.exhibitName}"
+            android:textColorHint="#00838F"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/exhibit_latlong"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/hint_exhibit_latlong"
+            android:text='@{exhibitWithGroup.coords}'
+            android:textColorHint="#757575"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/exhibit_name" />
+
+        <TextView
+            android:id="@+id/group_name"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_group_name"
+            android:text='@{exhibitWithGroup.groupName}'
+            android:textColorHint="#757575"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/exhibit_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/exhibit_name" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,6 +1,7 @@
-package edu.ucsd.cse110.zoodata;
+package edu.ucsd.cse110.zoodata_demo;
 
 import android.content.Context;
+
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -19,7 +20,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
         // Context of the app under test.
-        var appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("edu.ucsd.cse110.zoodata.test", appContext.getPackageName());
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("edu.ucsd.cse110.zoodata_demo", appContext.getPackageName());
     }
 }

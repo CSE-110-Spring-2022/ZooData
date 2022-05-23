@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">zoodata_demo</string>
+    <string name="hint_exhibit_name">Bali Mynah</string>
+    <string name="hint_group_name">Parker Aviary</string>
+    <string name="hint_exhibit_latlong">-0.00000, 0.0000</string>
+</resources>

@@ -1,0 +1,18 @@
+{
+  "nodes": [
+    {
+      "id": "foo"
+    },
+    {
+      "id": "bar"
+    }
+  ],
+  "edges": [
+    {
+      "id": "foo_to_bar",
+      "source": "foo",
+      "target": "bar",
+      "weight": 100.0
+    }
+  ]
+}
