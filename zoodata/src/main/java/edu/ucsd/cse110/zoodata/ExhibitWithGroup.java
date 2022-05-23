@@ -1,17 +1,18 @@
 package edu.ucsd.cse110.zoodata;
 
-import android.annotation.SuppressLint;
+import android.util.Pair;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import java.util.Optional;
+import java.util.Locale;
 
 /**
  * Represents a group, with an optional group.
  */
 public class ExhibitWithGroup {
-    @Embedded public Exhibit exhibit;
+    @Embedded
+    public Exhibit exhibit;
     @Relation(
         parentColumn = "group_id",
         entityColumn = "id"
@@ -27,16 +28,31 @@ public class ExhibitWithGroup {
         return group.name;
     }
 
-    @SuppressLint("DefaultLocale")
-    public String getCoords() {
-        Double lat, lng;
+    public String getCoordString() {
+        var coords = getCoords();
+        return String.format(Locale.getDefault(), "%3.6f, %3.6f", coords.first, coords.second);
+    }
+
+    public Pair<Double, Double> getCoords() {
         if (group != null) {
-            lat = group.lat;
-            lng = group.lng;
+            return Pair.create(group.lat, group.lng);
         } else {
-            lat = exhibit.lat;
-            lng = exhibit.lng;
+            return Pair.create(exhibit.lat, exhibit.lng);
         }
-        return String.format("%3.6f, %3.6f", lat, lng);
+    }
+
+    public boolean isCloseTo(Pair<Double, Double> otherCoords) {
+        return isCloseTo(otherCoords, 0.001);
+    }
+
+    public boolean isCloseTo(Pair<Double, Double> otherCoords, double delta) {
+        var coords = getCoords();
+        if (coords == null
+            || otherCoords == null
+            || coords.first == null || coords.second == null
+            || otherCoords.first == null || otherCoords.second == null) return false;
+        var dLat = coords.first - otherCoords.first;
+        var dLng = coords.second - otherCoords.second;
+        return Math.sqrt(Math.pow(dLat, 2) + Math.pow(dLng, 2)) < delta;
     }
 }

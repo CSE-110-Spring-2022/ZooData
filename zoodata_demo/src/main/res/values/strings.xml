@@ -3,4 +3,5 @@
     <string name="hint_exhibit_name">Bali Mynah</string>
     <string name="hint_group_name">Parker Aviary</string>
     <string name="hint_exhibit_latlong">-0.00000, 0.0000</string>
+    <string name="hint_you_are_here">YOU ARE HERE</string>
 </resources>

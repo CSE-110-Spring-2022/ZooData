@@ -1,6 +1,7 @@
 package edu.ucsd.cse110.zoodata_demo;
 
 import android.os.Bundle;
+import android.util.Pair;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
             .filter(e -> e.exhibit.isExhibit())
             .sorted(Comparator.comparing(e -> e.exhibit.name))
             .collect(Collectors.toList());
-        adapter.setExhibitWithGroups(exhibitsWithGroups);
+        adapter.setExhibitsWithGroups(exhibitsWithGroups);
+        adapter.setLastKnownCoords(Pair.create(32.737986, -117.169499));
 
         // Set up the recycler view.
         var recyclerView = binding.recyclerView;

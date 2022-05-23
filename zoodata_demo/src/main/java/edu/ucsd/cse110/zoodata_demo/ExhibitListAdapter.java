@@ -1,9 +1,8 @@
 package edu.ucsd.cse110.zoodata_demo;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,14 +10,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import edu.ucsd.cse110.zoodata.ExhibitWithGroup;
 import edu.ucsd.cse110.zoodata_demo.databinding.ExhibitListItemBinding;
 
 public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.ViewHolder> {
-    private final List<ExhibitWithGroup> exhibitWithGroups = new ArrayList<>();
+    private final List<ExhibitWithGroup> exhibitsWithGroups = new ArrayList<>();
+    private Pair<Double, Double> lastKnownCoords = null;
 
     public ExhibitListAdapter() {
         this.setHasStableIds(true);
@@ -34,8 +34,8 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        var data = exhibitWithGroups.get(position);
-        holder.bind(data);
+        var data = exhibitsWithGroups.get(position);
+        holder.bind(data, lastKnownCoords);
     }
 
     @Override
@@ -45,19 +45,30 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
 
     @Override
     public long getItemId(int position) {
-        return exhibitWithGroups.get(position).exhibit.id.hashCode();
+        return exhibitsWithGroups.get(position).exhibit.id.hashCode();
     }
 
     @Override
     public int getItemCount() {
-        return exhibitWithGroups.size();
+        return exhibitsWithGroups.size();
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void setExhibitWithGroups(List<ExhibitWithGroup> exhibitWithGroups) {
-        this.exhibitWithGroups.clear();
-        this.exhibitWithGroups.addAll(exhibitWithGroups);
+    public void setExhibitsWithGroups(List<ExhibitWithGroup> exhibitsWithGroups) {
+        this.exhibitsWithGroups.clear();
+        this.exhibitsWithGroups.addAll(exhibitsWithGroups);
         this.notifyDataSetChanged();
+    }
+
+    public void setLastKnownCoords(Pair<Double, Double> lastKnownCoords) {
+        this.lastKnownCoords = lastKnownCoords;
+        IntStream.range(0, exhibitsWithGroups.size())
+            .forEach(position -> {
+                var exhibitWithGroup = exhibitsWithGroups.get(position);
+                if (exhibitWithGroup.isCloseTo(lastKnownCoords)) {
+                    this.notifyItemChanged(position);
+                }
+            });
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,8 +79,9 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
             this.binding = binding;
         }
 
-        public void bind(ExhibitWithGroup data) {
-            binding.setVariable(BR.exhibitWithGroup, data);
+        public void bind(ExhibitWithGroup exhibitWithGroup, Pair<Double, Double> lastKnownCoords) {
+            binding.setVariable(BR.exhibitWithGroup, exhibitWithGroup);
+            binding.setVariable(BR.lastKnownCoords, lastKnownCoords);
             binding.executePendingBindings();
         }
     }

@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="lastKnownCoords"
+            type="android.util.Pair&lt;Double, Double>" />
 
         <variable
             name="exhibitWithGroup"
@@ -22,7 +25,6 @@
             android:layout_marginTop="16dp"
             android:hint="@string/hint_exhibit_name"
             android:text="@{exhibitWithGroup.exhibitName}"
-            android:textColorHint="#00838F"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="@string/hint_exhibit_latlong"
-            android:text='@{exhibitWithGroup.coords}'
+            android:text="@{exhibitWithGroup.coordString}"
             android:textColorHint="#757575"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -55,5 +57,21 @@
             app:layout_constraintBottom_toBottomOf="@+id/exhibit_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/exhibit_name" />
+
+        <TextView
+            android:id="@+id/is_nearby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical|end"
+            android:hint="@string/hint_you_are_here"
+            android:text='@{exhibitWithGroup.isCloseTo(lastKnownCoords) ? "NEARBY" : " "}'
+            android:textColor="#FF8800"
+            android:textColorHint="#757575"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/exhibit_latlong"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/exhibit_latlong" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
