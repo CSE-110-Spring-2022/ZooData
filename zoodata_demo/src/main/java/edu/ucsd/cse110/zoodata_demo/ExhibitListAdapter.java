@@ -3,27 +3,24 @@ package edu.ucsd.cse110.zoodata_demo;
 import android.annotation.SuppressLint;
 import android.util.Pair;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import edu.ucsd.cse110.zoodata.ExhibitWithGroup;
 import edu.ucsd.cse110.zoodata_demo.databinding.ExhibitListItemBinding;
 
 public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.ViewHolder> {
     private final List<ExhibitWithGroup> exhibitsWithGroups = new ArrayList<>();
-    private final LifecycleOwner owner;
     private Pair<Double, Double> lastKnownCoords = null;
 
-    public ExhibitListAdapter(LifecycleOwner owner) {
-        this.owner = owner;
+    public ExhibitListAdapter() {
         this.setHasStableIds(true);
     }
 
@@ -31,8 +28,7 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         var inflater = LayoutInflater.from(parent.getContext());
-        ExhibitListItemBinding binding = DataBindingUtil.inflate(inflater, viewType, parent, false);
-        binding.setLifecycleOwner(owner);
+        ExhibitListItemBinding binding = ExhibitListItemBinding.inflate(inflater, parent, false);
         return new ViewHolder(binding);
     }
 
@@ -79,9 +75,12 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
         }
 
         public void bind(ExhibitWithGroup exhibitWithGroup, Pair<Double, Double> lastKnownCoords) {
-            binding.setVariable(BR.exhibitWithGroup, exhibitWithGroup);
-            binding.setVariable(BR.lastKnownCoords, lastKnownCoords);
-            binding.executePendingBindings();
+            binding.exhibitName.setText(exhibitWithGroup.getExhibitName());
+            binding.exhibitLatlong.setText(exhibitWithGroup.getCoordString());
+            binding.groupName.setText(exhibitWithGroup.getGroupName());
+
+            var visibility = exhibitWithGroup.isCloseTo(lastKnownCoords) ? View.VISIBLE : View.GONE;
+            binding.nearbyIndicator.setVisibility(visibility);
         }
     }
 }

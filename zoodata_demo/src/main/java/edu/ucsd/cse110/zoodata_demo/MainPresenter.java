@@ -25,7 +25,7 @@ public class MainPresenter {
         this.model = model;
         this.view = view;
 
-        var adapter = new ExhibitListAdapter(activity);
+        var adapter = new ExhibitListAdapter();
 
         // Set up the recycler view.
         recyclerView = view.recyclerView;

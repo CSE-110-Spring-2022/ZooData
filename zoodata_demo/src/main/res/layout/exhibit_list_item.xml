@@ -1,80 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    <data>
-        <import type="android.view.View"/>
+    android:layout_width="match_parent"
+    android:layout_height="96dp">
 
-        <variable
-            name="lastKnownCoords"
-            type="android.util.Pair&lt;Double, Double>" />
+    <TextView
+        android:id="@+id/exhibit_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/hint_exhibit_name"
+        android:textColorHint="#78909C"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <variable
-            name="exhibitWithGroup"
-            type="edu.ucsd.cse110.zoodata.ExhibitWithGroup" />
-    </data>
+    <TextView
+        android:id="@+id/exhibit_latlong"
+        android:layout_width="wrap_content"
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="96dp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/hint_exhibit_latlong"
+        android:textColorHint="#757575"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/exhibit_name" />
 
-        <TextView
-            android:id="@+id/exhibit_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:hint="@string/hint_exhibit_name"
-            android:text="@{exhibitWithGroup.exhibitName}"
-            android:textColorHint="#78909C"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/group_name"
+        android:layout_width="wrap_content"
 
-        <TextView
-            android:id="@+id/exhibit_latlong"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
+        android:hint="@string/hint_group_name"
+        android:textColorHint="#757575"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/exhibit_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/exhibit_name" />
 
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:hint="@string/hint_exhibit_latlong"
-            android:text="@{exhibitWithGroup.coordString}"
-            android:textColorHint="#757575"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/exhibit_name" />
-
-        <TextView
-            android:id="@+id/group_name"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:gravity="center_vertical"
-            android:hint="@string/hint_group_name"
-            android:text='@{exhibitWithGroup.groupName}'
-            android:textColorHint="#757575"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/exhibit_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/exhibit_name" />
-
-        <TextView
-            android:id="@+id/nearby_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:gravity="center_vertical|end"
-            android:text="@string/hint_you_are_here"
-            android:visibility='@{exhibitWithGroup.isCloseTo(lastKnownCoords) ? View.VISIBLE : View.GONE}'
-            android:textColor="#FF8800"
-            android:textColorHint="#757575"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/exhibit_latlong"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/exhibit_latlong" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    <TextView
+        android:id="@+id/nearby_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical|end"
+        android:text="@string/hint_you_are_here"
+        android:textColor="#FF8800"
+        android:textColorHint="#757575"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/exhibit_latlong"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/exhibit_latlong" />
+</androidx.constraintlayout.widget.ConstraintLayout>
