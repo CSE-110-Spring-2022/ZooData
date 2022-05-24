@@ -64,6 +64,12 @@ public class ExampleTest {
             // WHEN: this location is mocked...
             activity.mockLocationUpdate(coords);
 
+            /*
+             * WARNING: THIS IS BUGGED.
+             * FOR SOME REASON, THE UPDATE ISN'T APPLIED TO THE UI
+             * QUICK ENOUGH, EVEN IF WE TRY TO WAIT FOR IT. ANNOYING!
+             */
+
             // THEN "NEARBY" is visible for Bali Mynah.
             var mynahNearbyIndicator = activity.getRecyclerView()
                 .findViewHolderForItemId(mynah.exhibit.id.hashCode()).itemView
