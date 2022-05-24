@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,9 +19,11 @@ import edu.ucsd.cse110.zoodata_demo.databinding.ExhibitListItemBinding;
 
 public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.ViewHolder> {
     private final List<ExhibitWithGroup> exhibitsWithGroups = new ArrayList<>();
+    private final LifecycleOwner owner;
     private Pair<Double, Double> lastKnownCoords = null;
 
-    public ExhibitListAdapter() {
+    public ExhibitListAdapter(LifecycleOwner owner) {
+        this.owner = owner;
         this.setHasStableIds(true);
     }
 
@@ -29,6 +32,7 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         var inflater = LayoutInflater.from(parent.getContext());
         ExhibitListItemBinding binding = DataBindingUtil.inflate(inflater, viewType, parent, false);
+        binding.setLifecycleOwner(owner);
         return new ViewHolder(binding);
     }
 

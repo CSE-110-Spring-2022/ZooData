@@ -1,10 +1,8 @@
 package edu.ucsd.cse110.zoodata_demo;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import android.content.Intent;
-import android.view.Choreographer;
 import android.view.View;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
@@ -22,8 +20,6 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
 
 import edu.ucsd.cse110.zoodata_demo.db.ZooDatabase;
 
@@ -32,7 +28,7 @@ public class ExampleTest {
     @Rule
     public TestRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
-    /** NOTE: THIS ISN'T WORKING, UNCLEAR WHY **/
+    /** NOTE: THIS ISN'T WORKING **/
     @Test
     public void test_nearby_shown_on_location_update() throws IOException {
         var context = ApplicationProvider.getApplicationContext();
@@ -54,25 +50,23 @@ public class ExampleTest {
         intent.putExtra(MainActivity.EXTRA_LISTEN_TO_GPS, false);
 
         var scenario = ActivityScenario.<MainActivity>launch(intent);
-        scenario.moveToState(Lifecycle.State.CREATED);
+
+        // THIS IS CRITICAL WHEN USING LIVEDATA.
+        // Without it, model.getLastKnownCoords().observe(...) will not trigger because
+        // the lifecycle owner it is scoped to has not been started!
+        scenario.moveToState(Lifecycle.State.STARTED);
 
         scenario.onActivity(activity -> {
-            // GIVEN: the coordinates of the Motmots...
+            // GIVEN: the coordinates of the Mynah...
             var mynah = db.exhibitsDao().getExhibitWithGroupById("mynah");
             var coords = mynah.getCoords();
 
             // WHEN: this location is mocked...
             activity.mockLocationUpdate(coords);
 
-            /*
-             * WARNING: THIS IS BUGGED.
-             * FOR SOME REASON, THE UPDATE ISN'T APPLIED TO THE UI
-             * QUICK ENOUGH, EVEN IF WE TRY TO WAIT FOR IT. ANNOYING!
-             */
-
             // THEN "NEARBY" is visible for Bali Mynah.
             var mynahNearbyIndicator = activity.getRecyclerView()
-                .findViewHolderForItemId(mynah.exhibit.id.hashCode()).itemView
+                .findViewHolderForItemId("mynah".hashCode()).itemView
                 .findViewById(R.id.nearby_indicator);
 
             assertEquals("Mynah shown as NEARBY",

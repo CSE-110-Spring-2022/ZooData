@@ -14,7 +14,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="434511d4-980a-45a0-aebb-6130b60db9bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/zoodata/src/main/java/edu/ucsd/cse110/zoodata/ZooGraph.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zoodata_demo/src/androidTest/java/edu/ucsd/cse110/zoodata_demo/ExampleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/zoodata_demo/src/androidTest/java/edu/ucsd/cse110/zoodata_demo/ExampleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zoodata_demo/src/main/java/edu/ucsd/cse110/zoodata_demo/ExhibitListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/zoodata_demo/src/main/java/edu/ucsd/cse110/zoodata_demo/ExhibitListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zoodata_demo/src/main/java/edu/ucsd/cse110/zoodata_demo/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/zoodata_demo/src/main/java/edu/ucsd/cse110/zoodata_demo/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zoodata_demo/src/main/java/edu/ucsd/cse110/zoodata_demo/MainPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/zoodata_demo/src/main/java/edu/ucsd/cse110/zoodata_demo/MainPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zoodata_demo/src/main/java/edu/ucsd/cse110/zoodata_demo/MainViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/zoodata_demo/src/main/java/edu/ucsd/cse110/zoodata_demo/MainViewModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +80,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="android-custom-view/Users/dylan/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
+    <property name="android-custom-view/Users/dylan/Library/Android/sdk/sources/android-32/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-view/Users/dylan/Library/Android/sdk/sources/android-32/android/widget/TextView.java_SELECTED" value="TextView" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="JAVA" />

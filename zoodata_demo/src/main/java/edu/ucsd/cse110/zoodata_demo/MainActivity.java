@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Check intent extras for flags.
         var listenToGps = getIntent().getBooleanExtra(EXTRA_LISTEN_TO_GPS, true);
+        listenToGps = false;
 
         // MVP pattern: delegate responsibility for managing view and model to presenter, applying
         // dependency injection to provide the model and view to the presenter. Only responsibility
