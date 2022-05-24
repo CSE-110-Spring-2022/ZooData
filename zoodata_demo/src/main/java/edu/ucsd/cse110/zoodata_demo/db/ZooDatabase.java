@@ -19,9 +19,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import edu.ucsd.cse110.zoodata.Exhibit;
-import edu.ucsd.cse110.zoodata.Exhibits;
 import edu.ucsd.cse110.zoodata.Trail;
-import edu.ucsd.cse110.zoodata.Trails;
 
 @Database(entities = {Exhibit.class, Trail.class}, version = 1, exportSchema = false)
 @TypeConverters({ZooDatabase.Converters.class})
@@ -104,10 +102,10 @@ public abstract class ZooDatabase extends RoomDatabase {
         instance.clearAllTables();
         shouldForcePopulate = false;
 
-        var exhibits = Exhibits.fromJson(exhibitsReader);
+        var exhibits = Exhibit.fromJson(exhibitsReader);
         instance.exhibitsDao().insert(exhibits);
 
-        var trails = Trails.fromJson(trailsReader);
+        var trails = Trail.fromJson(trailsReader);
         instance.trailsDao().insert(trails);
     }
 

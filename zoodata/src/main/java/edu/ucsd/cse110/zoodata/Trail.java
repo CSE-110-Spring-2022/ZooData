@@ -35,4 +35,17 @@ public class Trail {
         this.street = street;
     }
 
+    public static List<Trail> fromJson(Reader infoReader) {
+        var gson = new Gson();
+        var type = new TypeToken<List<Trail>>(){}.getType();
+        return gson.fromJson(infoReader, type);
+    }
+
+    public static void toJson(List<Trail> infos, Writer writer) throws IOException {
+        var gson = new Gson();
+        var type = new TypeToken<List<Trail>>(){}.getType();
+        gson.toJson(infos, type, writer);
+        writer.flush();
+        writer.close();
+    }
 }

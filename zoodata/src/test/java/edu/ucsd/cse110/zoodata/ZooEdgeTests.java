@@ -19,7 +19,7 @@ public class ZooEdgeTests {
         var graphReader = TestUtils.resourceReader("foobar_graph.json");
         var infoReader = TestUtils.resourceReader("foobar_edge_info.json");
 
-        var edges = Trails.fromJson(graphReader, infoReader);
+        var edges = Trail.fromJson(graphReader, infoReader);
         assertEquals(1, edges.size());
     }
 }
