@@ -85,15 +85,16 @@ public class ExampleTest {
             var mynah = db.exhibitsDao().getExhibitWithGroupById("mynah");
             var coords = mynah.getCoords();
 
-            Log.d("FOOBAR", "Mocking location update...");
+            Log.d("FOOBAR", String.format("Mocking location update to %s...", coords.toString()));
 
             // WHEN: this location is mocked...
             activity.mockLocationUpdate(coords);
 
             Log.d("FOOBAR", "Retrieving view holder and nearby indicator...");
 
-            // BUG: (see logs), the update isn't applied until AFTER this assertion for
-            // some very weird reason.
+            // BUG: the update isn't applied until AFTER
+            // this assertion for some very weird reason.
+            // Take a look at logcat to see the issue.
 
             // THEN: the NEARBY indicator is visible for the Mynah item.
             TextView mynahNearbyIndicator = activity.getRecyclerView()

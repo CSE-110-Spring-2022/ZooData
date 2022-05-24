@@ -71,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     @VisibleForTesting
     void mockLocationUpdate(Pair<Double, Double> coords) {
-        runOnUiThread(() -> {
-            presenter.updateLastKnownCoords(coords);
-        });
+        presenter.updateLastKnownCoords(coords);
     }
 
     @VisibleForTesting

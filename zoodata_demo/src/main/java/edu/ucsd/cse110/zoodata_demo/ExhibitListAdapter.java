@@ -63,7 +63,7 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
 
     @SuppressLint("NotifyDataSetChanged")
     public void setLastKnownCoords(Pair<Double, Double> lastKnownCoords) {
-        Log.d("FOOBAR", String.format("Updating adapter lastKnownCoords to %s and notifying...", lastKnownCoords));
+        Log.d("FOOBAR", String.format("Updating adapter lastKnownCoords to %s and notifying of changes...", lastKnownCoords));
         this.lastKnownCoords = lastKnownCoords;
         this.notifyDataSetChanged();
     }

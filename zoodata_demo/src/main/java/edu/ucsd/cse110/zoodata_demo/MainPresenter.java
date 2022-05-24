@@ -39,7 +39,7 @@ public class MainPresenter {
 
         model.getExhibitsWithGroups().observe(activity, adapter::setExhibitsWithGroups);
         model.getLastKnownCoords().observe(activity, (coords) -> {
-            Log.d("FOOBAR", String.format("Observing change in coords: %s", String.valueOf(coords)));
+            Log.d("FOOBAR", String.format("Presenter observing change in coords: %s", coords));
             adapter.setLastKnownCoords(coords);
         });
     }
