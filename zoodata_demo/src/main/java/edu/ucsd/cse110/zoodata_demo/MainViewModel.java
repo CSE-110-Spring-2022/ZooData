@@ -37,6 +37,6 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void setLastKnownCoords(Pair<Double, Double> coords) {
-        lastKnownCoords.postValue(coords);
+        lastKnownCoords.setValue(coords);
     }
 }

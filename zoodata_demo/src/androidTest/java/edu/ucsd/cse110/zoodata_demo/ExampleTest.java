@@ -69,6 +69,12 @@ public class ExampleTest {
                 .findViewHolderForItemId("mynah".hashCode()).itemView
                 .findViewById(R.id.nearby_indicator);
 
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             assertEquals("Mynah shown as NEARBY",
                 View.VISIBLE,
                 mynahNearbyIndicator.getVisibility()
