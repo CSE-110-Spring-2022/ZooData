@@ -11,6 +11,7 @@ import androidx.room.Room;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,6 +30,7 @@ public class ExampleTest {
     public TestRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     /** NOTE: THIS ISN'T WORKING **/
+    @LargeTest
     @Test
     public void test_nearby_shown_on_location_update() throws IOException {
         var context = ApplicationProvider.getApplicationContext();
@@ -68,12 +70,6 @@ public class ExampleTest {
             var mynahNearbyIndicator = activity.getRecyclerView()
                 .findViewHolderForItemId("mynah".hashCode()).itemView
                 .findViewById(R.id.nearby_indicator);
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
             assertEquals("Mynah shown as NEARBY",
                 View.VISIBLE,
