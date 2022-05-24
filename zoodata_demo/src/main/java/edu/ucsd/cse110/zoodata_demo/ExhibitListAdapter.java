@@ -1,6 +1,7 @@
 package edu.ucsd.cse110.zoodata_demo;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,7 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
 
     @SuppressLint("NotifyDataSetChanged")
     public void setLastKnownCoords(Pair<Double, Double> lastKnownCoords) {
+        Log.d("FOOBAR", String.format("Updating adapter lastKnownCoords to %s and notifying...", lastKnownCoords));
         this.lastKnownCoords = lastKnownCoords;
         this.notifyDataSetChanged();
     }
@@ -81,6 +83,10 @@ public class ExhibitListAdapter extends RecyclerView.Adapter<ExhibitListAdapter.
 
             var visibility = exhibitWithGroup.isCloseTo(lastKnownCoords) ? View.VISIBLE : View.GONE;
             binding.nearbyIndicator.setVisibility(visibility);
+
+            if (visibility == View.VISIBLE) {
+                Log.d("FOOBAR", String.format("Setting visibility of %s to VISIBLE!", exhibitWithGroup.exhibit.id));
+            }
         }
     }
 }

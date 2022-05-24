@@ -2,6 +2,7 @@ package edu.ucsd.cse110.zoodata_demo;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -37,7 +38,10 @@ public class MainPresenter {
         mockButton.setOnClickListener(this::onMockButtonClicked);
 
         model.getExhibitsWithGroups().observe(activity, adapter::setExhibitsWithGroups);
-        model.getLastKnownCoords().observe(activity, adapter::setLastKnownCoords);
+        model.getLastKnownCoords().observe(activity, (coords) -> {
+            Log.d("FOOBAR", String.format("Observing change in coords: %s", String.valueOf(coords)));
+            adapter.setLastKnownCoords(coords);
+        });
     }
 
     public void updateLastKnownCoords(Pair<Double, Double> coords) {

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
@@ -23,6 +24,7 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.zoodata_demo.db.ZooDatabase;
 
@@ -30,6 +32,25 @@ import edu.ucsd.cse110.zoodata_demo.db.ZooDatabase;
 public class ExampleTest {
     @Rule
     public TestRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+
+    public static void busyWait() {
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test_live_data_behaving() {
+        /*
+        This test will only work with the InstantTaskExecutorRule above. Otherwise,
+        the liveData will not be updated *synchronously* between line 43 and 44.
+         */
+        var liveData = new MutableLiveData<String>();
+        liveData.postValue("test");
+        assertEquals("test", liveData.getValue());
+    }
 
     @LargeTest
     @Test
@@ -64,17 +85,22 @@ public class ExampleTest {
             var mynah = db.exhibitsDao().getExhibitWithGroupById("mynah");
             var coords = mynah.getCoords();
 
+            Log.d("FOOBAR", "Mocking location update...");
+
             // WHEN: this location is mocked...
             activity.mockLocationUpdate(coords);
 
-            // THEN "NEARBY" is visible for Bali Mynah.
+            Log.d("FOOBAR", "Retrieving view holder and nearby indicator...");
+
+            // BUG: (see logs), the update isn't applied until AFTER this assertion for
+            // some very weird reason.
+
+            // THEN: the NEARBY indicator is visible for the Mynah item.
             TextView mynahNearbyIndicator = activity.getRecyclerView()
                 .findViewHolderForItemId("mynah".hashCode()).itemView
                 .findViewById(R.id.nearby_indicator);
 
-            Log.i("FOOBAR", mynahNearbyIndicator.getText().toString());
-            Log.i("FOOBAR", String.valueOf(mynahNearbyIndicator.getVisibility()));
-
+            Log.d("FOOBAR", "Asserting nearby indicator updated to visible...");
             assertEquals("Mynah shown as NEARBY",
                 View.VISIBLE,
                 mynahNearbyIndicator.getVisibility()
