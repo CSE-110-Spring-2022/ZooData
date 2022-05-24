@@ -98,6 +98,16 @@ public class ExampleTest {
         // second onActivity block. This creates the necessary waiting
         // such that the visibility changes have properly happened.
 
+        // You end up seeing a sequence of events like this, where the update
+        // happens AFTER the asset.
+        /*
+            D/FOOBAR: Updating adapter lastKnownCoords to Pair{32.73798565400121 -117.16949876733686} and notifying of changes...
+            D/FOOBAR: Retrieving view holder and nearby indicator...
+            D/FOOBAR: Asserting nearby indicator updated to visible...
+            D/FOOBAR: Setting visibility of mynah to VISIBLE!
+            D/FOOBAR: Setting visibility of dove to VISIBLE!
+         */
+
         scenario.onActivity(activity -> {
             Log.d("FOOBAR", "Retrieving view holder and nearby indicator...");
 
