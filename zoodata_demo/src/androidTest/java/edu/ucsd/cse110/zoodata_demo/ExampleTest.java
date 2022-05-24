@@ -3,7 +3,9 @@ package edu.ucsd.cse110.zoodata_demo;
 import static org.junit.Assert.assertEquals;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Lifecycle;
@@ -29,7 +31,6 @@ public class ExampleTest {
     @Rule
     public TestRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
-    /** NOTE: THIS ISN'T WORKING **/
     @LargeTest
     @Test
     public void test_nearby_shown_on_location_update() throws IOException {
@@ -67,9 +68,12 @@ public class ExampleTest {
             activity.mockLocationUpdate(coords);
 
             // THEN "NEARBY" is visible for Bali Mynah.
-            var mynahNearbyIndicator = activity.getRecyclerView()
+            TextView mynahNearbyIndicator = activity.getRecyclerView()
                 .findViewHolderForItemId("mynah".hashCode()).itemView
                 .findViewById(R.id.nearby_indicator);
+
+            Log.i("FOOBAR", mynahNearbyIndicator.getText().toString());
+            Log.i("FOOBAR", String.valueOf(mynahNearbyIndicator.getVisibility()));
 
             assertEquals("Mynah shown as NEARBY",
                 View.VISIBLE,
