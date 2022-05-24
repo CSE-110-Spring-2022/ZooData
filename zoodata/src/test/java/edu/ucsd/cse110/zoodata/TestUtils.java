@@ -3,8 +3,6 @@ package edu.ucsd.cse110.zoodata;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import edu.ucsd.cse110.zoodata.ZooEdgeTests;
-
 public class TestUtils {
     /**
      * @param path path to file in src/main/test/resources

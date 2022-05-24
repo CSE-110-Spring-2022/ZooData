@@ -3,12 +3,16 @@
     "id": "foo",
     "name": "Foo",
     "kind": "exhibit",
-    "tags": ["foo"]
+    "tags": [
+      "foo"
+    ]
   },
   {
     "id": "bar",
     "name": "Bar",
     "kind": "exhibit",
-    "tags": ["bar"]
+    "tags": [
+      "bar"
+    ]
   }
 ]

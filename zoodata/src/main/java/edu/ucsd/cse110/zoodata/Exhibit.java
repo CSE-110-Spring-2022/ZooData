@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Entity(tableName = "exhibits")
@@ -35,7 +33,8 @@ public class Exhibit {
 
     public static void toJson(List<Exhibit> infos, Writer writer) throws IOException {
         var gson = new Gson();
-        var type = new TypeToken<List<Exhibit>>(){}.getType();
+        var type = new TypeToken<List<Exhibit>>() {
+        }.getType();
         gson.toJson(infos, type, writer);
         writer.flush();
         writer.close();

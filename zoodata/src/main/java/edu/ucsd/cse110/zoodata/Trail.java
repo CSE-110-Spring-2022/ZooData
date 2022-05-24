@@ -9,8 +9,6 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
-import org.jgrapht.graph.DefaultWeightedEdge;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -37,13 +35,15 @@ public class Trail {
 
     public static List<Trail> fromJson(Reader infoReader) {
         var gson = new Gson();
-        var type = new TypeToken<List<Trail>>(){}.getType();
+        var type = new TypeToken<List<Trail>>() {
+        }.getType();
         return gson.fromJson(infoReader, type);
     }
 
     public static void toJson(List<Trail> infos, Writer writer) throws IOException {
         var gson = new Gson();
-        var type = new TypeToken<List<Trail>>(){}.getType();
+        var type = new TypeToken<List<Trail>>() {
+        }.getType();
         gson.toJson(infos, type, writer);
         writer.flush();
         writer.close();

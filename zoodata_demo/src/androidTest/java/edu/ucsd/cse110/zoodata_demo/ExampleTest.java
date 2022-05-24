@@ -23,8 +23,6 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.zoodata_demo.db.ZooDatabase;
 
