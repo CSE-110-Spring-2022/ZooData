@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
-import java.util.Set;
 
 @Entity(tableName = "exhibits")
 public class Exhibit {
@@ -47,10 +46,6 @@ public class Exhibit {
         @SerializedName("exhibit") EXHIBIT,
         @SerializedName("intersection") INTERSECTION,
         @SerializedName("exhibit_group") EXHIBIT_GROUP;
-
-        public static final Set<Kind> NAVIGABLE_KINDS = Set.of(
-            GATE, EXHIBIT, INTERSECTION
-        );
     }
 
     @PrimaryKey
@@ -101,10 +96,6 @@ public class Exhibit {
 
     public boolean hasGroup() {
         return groupId != null;
-    }
-
-    public boolean isNavigable() {
-        return Kind.NAVIGABLE_KINDS.contains(kind);
     }
 
     public Exhibit(@NonNull String id,

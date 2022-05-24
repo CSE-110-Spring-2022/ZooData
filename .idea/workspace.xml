@@ -16,6 +16,7 @@
   <component name="ChangeListManager">
     <list default="true" id="434511d4-980a-45a0-aebb-6130b60db9bb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zoodata/src/main/java/edu/ucsd/cse110/zoodata/Exhibit.java" beforeDir="false" afterPath="$PROJECT_DIR$/zoodata/src/main/java/edu/ucsd/cse110/zoodata/Exhibit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,11 +98,11 @@
       <recent name="$PROJECT_DIR$/etc" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="edu.ucsd.cse110.zoodata.Trail" />
+      <recent name="edu.ucsd.cse110.zoodata.Exhibit" />
       <recent name="edu.ucsd.cse110.zoodata.model.Trails" />
       <recent name="Exhibits" />
       <recent name="edu.ucsd.cse110.zoodata.v2.ZooNodeInfo" />
-      <recent name="edu.ucsd.cse110.zoodata.v2.ZooNodeInfo.toJson" />
-      <recent name="TestUtils" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/zoodata_demo/src/main/assets/fixtures" />
