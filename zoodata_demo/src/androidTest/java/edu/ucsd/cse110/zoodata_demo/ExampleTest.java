@@ -90,11 +90,18 @@ public class ExampleTest {
             // WHEN: this location is mocked...
             activity.mockLocationUpdate(coords);
 
-            Log.d("FOOBAR", "Retrieving view holder and nearby indicator...");
+        });
 
-            // BUG: the update isn't applied until AFTER
-            // this assertion for some very weird reason.
-            // Take a look at logcat to see the issue.
+        // FIXED BUG: if we put both the GIVEN/WHEN and THEN in the
+        // same onActivity block, the update isn't applied until AFTER
+        // this assertion for some very weird reason. (Darn it, Android!)
+
+        // We can (somehow) get around this by putting the check in a
+        // second onActivity block. This creates the necessary waiting
+        // such that the visibility changes have properly happened.
+
+        scenario.onActivity(activity -> {
+            Log.d("FOOBAR", "Retrieving view holder and nearby indicator...");
 
             // THEN: the NEARBY indicator is visible for the Mynah item.
             TextView mynahNearbyIndicator = activity.getRecyclerView()
