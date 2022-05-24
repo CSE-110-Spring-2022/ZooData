@@ -52,8 +52,8 @@ public class ExampleTest {
         var scenario = ActivityScenario.<MainActivity>launch(intent);
 
         // THIS IS CRITICAL WHEN USING LIVEDATA.
-        // Without it, model.getLastKnownCoords().observe(...) will not trigger because
-        // the lifecycle owner it is scoped to has not been started!
+        // Without it, model.getLastKnownCoords().observe(...) will not trigger
+        // because the lifecycle owner it is scoped to has not been started!
         scenario.moveToState(Lifecycle.State.STARTED);
 
         scenario.onActivity(activity -> {
