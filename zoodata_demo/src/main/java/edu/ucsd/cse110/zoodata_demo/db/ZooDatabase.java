@@ -84,9 +84,7 @@ public abstract class ZooDatabase extends RoomDatabase {
         singleton = testDatabase;
     }
 
-    private static void populate(Context context, ZooDatabase instance) {
-        Log.i(ZooDatabase.class.getCanonicalName(), "Populating database from assets...");
-
+    public static void populate(Context context, ZooDatabase instance) {
         Reader exhibitsReader = null;
         Reader trailsReader = null;
         try {
@@ -95,6 +93,12 @@ public abstract class ZooDatabase extends RoomDatabase {
         } catch (IOException e) {
             throw new RuntimeException("Unable to load data for prepopulation!");
         }
+        populate(context, instance, exhibitsReader, trailsReader);
+    }
+
+    @VisibleForTesting
+    public static void populate(Context context, ZooDatabase instance, Reader exhibitsReader, Reader trailsReader) {
+        Log.i(ZooDatabase.class.getCanonicalName(), "Populating database from assets...");
 
         // Clear all of the tables
         instance.clearAllTables();

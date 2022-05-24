@@ -6,20 +6,24 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import edu.ucsd.cse110.zoodata_demo.databinding.MainBinding;
 import edu.ucsd.cse110.zoodata_demo.location.PermissionChecker;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getCanonicalName();
+    public static final String EXTRA_LISTEN_TO_GPS = "listen_to_gps";
 
     @VisibleForTesting
     public MainPresenter presenter;
@@ -29,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Exhibits");
 
-        // Check intent extras.
-        var listenToGps = getIntent().getBooleanExtra("listen_to_gps", true);
+        // Check intent extras for flags.
+        var listenToGps = getIntent().getBooleanExtra(EXTRA_LISTEN_TO_GPS, true);
 
         // MVP pattern: delegate responsibility for managing view and model to presenter, applying
         // dependency injection to provide the model and view to the presenter. Only responsibility
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("MissingPermission")
-    private void setupLocationListener(BiConsumer<Double, Double> handleNewCoords) {
+    private void setupLocationListener(Consumer<Pair<Double, Double>> handleNewCoords) {
         new PermissionChecker(this).ensurePermissions();
 
         // Connect location listener to the model.
@@ -53,9 +57,23 @@ public class MainActivity extends AppCompatActivity {
         var locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(@NonNull Location location) {
-                handleNewCoords.accept(location.getLatitude(), location.getLongitude());
+                var coords = Pair.create(
+                    location.getLatitude(),
+                    location.getLongitude()
+                );
+                handleNewCoords.accept(coords);
             }
         };
         locationManager.requestLocationUpdates(provider, 0, 0f, locationListener);
+    }
+
+    @VisibleForTesting
+    void mockLocationUpdate(Pair<Double, Double> coords) {
+        presenter.updateLastKnownCoords(coords);
+    }
+
+    @VisibleForTesting
+    RecyclerView getRecyclerView() {
+        return presenter.getRecyclerView();
     }
 }

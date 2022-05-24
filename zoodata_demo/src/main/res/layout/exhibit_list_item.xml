@@ -62,7 +62,7 @@
             app:layout_constraintTop_toTopOf="@+id/exhibit_name" />
 
         <TextView
-            android:id="@+id/is_nearby"
+            android:id="@+id/nearby_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

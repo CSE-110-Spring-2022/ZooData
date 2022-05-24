@@ -8,7 +8,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import edu.ucsd.cse110.zoodata_demo.databinding.MainBinding;
 
@@ -16,6 +18,7 @@ public class MainPresenter {
     private final MainActivity activity;
     private final MainViewModel model;
     private final MainBinding view;
+    private final RecyclerView recyclerView;
 
     public MainPresenter(MainActivity activity, MainViewModel model, MainBinding view) {
         this.activity = activity;
@@ -25,7 +28,7 @@ public class MainPresenter {
         var adapter = new ExhibitListAdapter();
 
         // Set up the recycler view.
-        var recyclerView = view.recyclerView;
+        recyclerView = view.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setAdapter(adapter);
 
@@ -37,10 +40,8 @@ public class MainPresenter {
         model.getLastKnownCoords().observe(activity, adapter::setLastKnownCoords);
     }
 
-    public void updateLastKnownCoords(double lat, double lng) {
-        activity.runOnUiThread(() -> {
-            model.setLastKnownCoords(Pair.create(lat, lng));
-        });
+    public void updateLastKnownCoords(Pair<Double, Double> coords) {
+        model.setLastKnownCoords(coords);
     }
 
     @SuppressLint("SetTextI18n")
@@ -53,12 +54,12 @@ public class MainPresenter {
         final EditText latInput = new EditText(activity);
         latInput.setInputType(inputType);
         latInput.setHint("Latitude");
-        latInput.setText("32.746303");
+        latInput.setText("32.737986");
 
         final EditText lngInput = new EditText(activity);
         lngInput.setInputType(inputType);
         lngInput.setHint("Longitude");
-        lngInput.setText("-117.166595");
+        lngInput.setText("-117.169499");
 
         final LinearLayout layout = new LinearLayout(activity);
         layout.setDividerPadding(8);
@@ -72,11 +73,16 @@ public class MainPresenter {
             .setPositiveButton("Submit", (dialog, which) -> {
                 var lat = Double.parseDouble(latInput.getText().toString());
                 var lng = Double.parseDouble(lngInput.getText().toString());
-                updateLastKnownCoords(lat, lng);
+                updateLastKnownCoords(Pair.create(lat, lng));
             })
             .setNegativeButton("Cancel", (dialog, which) -> {
                 dialog.cancel();
             });
         builder.show();
+    }
+
+    @VisibleForTesting
+    RecyclerView getRecyclerView() {
+        return recyclerView;
     }
 }
